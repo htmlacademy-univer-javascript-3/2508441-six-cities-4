@@ -1,7 +1,6 @@
 import PlaceCard from '../../components/place-card/place-card';
-import {places} from '../../mocked-places';
 
-function MainPage(): JSX.Element {
+function MainPage({offersAmount}: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -92,17 +91,9 @@ function MainPage(): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {places.map((item) => (
-                  <PlaceCard
-                    key={item.id}
-                    name={item.name}
-                    type={item.type}
-                    mark={item.mark}
-                    price={item.price}
-                    image={item.image}
-                    rating={item.rating}
-                    isBookmarked={item.isBookmarked}
-                  />))}
+                {Array.from({length:offersAmount}, (_, index) => (
+                  <PlaceCard key={index} />
+                ))}
               </div>
             </section>
             <div className="cities__right-section">
@@ -113,6 +104,10 @@ function MainPage(): JSX.Element {
       </main>
     </div>
   );
+}
+
+type MainPageProps = {
+  offersAmount: number;
 }
 
 export default MainPage;
