@@ -3,21 +3,17 @@ import PlaceCard from '../../components/place-card/place-card';
 import {Place} from '../../types/Place.ts';
 
 function OffersList({offers}: OffersListProps): JSX.Element {
-  const [hoveredOffer, setHoveredOffer] = useState<Place | null>(null);
+  const [hoveredOfferId, setHoveredOfferId] = useState<string | null>(null);
 
-  const handleMouseEnter = (offer: Place) => {
-    setHoveredOffer(offer);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredOffer(null);
+  const handleOfferHover = (offerId: string | null) => {
+    setHoveredOfferId(offerId);
   };
 
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">312 places to stay in Amsterdam</b>
-      <p>Hovered offer ID: {hoveredOffer?.id}</p>
+      <p>Hovered offer ID: {hoveredOfferId}</p>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex={0}>
@@ -35,23 +31,18 @@ function OffersList({offers}: OffersListProps): JSX.Element {
       </form>
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer) => (
-          <div
+          <PlaceCard
             key={offer.id}
-            onMouseEnter={() => handleMouseEnter(offer)}
-            onMouseLeave={handleMouseLeave}
-          >
-            <PlaceCard
-              key={offer.id}
-              id={offer.id}
-              title={offer.title}
-              type={offer.type}
-              isFavorite={offer.isFavorite}
-              isPremium={offer.isPremium}
-              price={offer.price}
-              images={offer.images}
-              rating={offer.rating}
-            />
-          </div>
+            onHover={handleOfferHover}
+            id={offer.id}
+            title={offer.title}
+            type={offer.type}
+            isFavorite={offer.isFavorite}
+            isPremium={offer.isPremium}
+            price={offer.price}
+            images={offer.images}
+            rating={offer.rating}
+          />
         ))}
       </div>
     </section>

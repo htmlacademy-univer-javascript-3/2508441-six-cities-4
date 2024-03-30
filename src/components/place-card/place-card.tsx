@@ -1,17 +1,31 @@
 import {useNavigate} from 'react-router-dom';
-import {PlaceCardType} from '../../types/PlaceCardType.ts';
 
-function PlaceCard({...props}: PlaceCardType): JSX.Element {
+function PlaceCard({...props}: PlaceCardProps): JSX.Element {
   const navigate = useNavigate();
+
+  const handleMouseEnter = (offerId: string) => {
+    props.onHover(offerId);
+  };
+
+  const handleMouseLeave = () => {
+    props.onHover(null);
+  };
+
   const handleClick = (placeId: string) => {
     navigate(`/offer/${placeId}`);
   };
 
   return (
-    <article className="cities__card place-card">
-      <div className={props.isPremium ? 'place-card__mark' : 'visually-hidden'}>
-        <span>Premium</span>
-      </div>
+    <article className="cities__card place-card"
+      onMouseEnter={() => handleMouseEnter(props.id)}
+      onMouseLeave={() => handleMouseLeave()}
+    >
+      {
+        props.isPremium &&
+        <div className='place-card__mark'>
+          <span>Premium</span>
+        </div>
+      }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <img
           onClick={() => handleClick(props.id)}
@@ -29,7 +43,12 @@ function PlaceCard({...props}: PlaceCardType): JSX.Element {
             <b className="place-card__price-value">{props.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className={props.isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button'} type="button">
+          <button
+            className={props.isFavorite ?
+              'place-card__bookmark-button place-card__bookmark-button--active button' :
+              'place-card__bookmark-button button'}
+            type="button"
+          >
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark"/>
             </svg>
@@ -48,8 +67,19 @@ function PlaceCard({...props}: PlaceCardType): JSX.Element {
         <p className="place-card__type">{props.type}</p>
       </div>
     </article>
-
   );
+}
+
+type PlaceCardProps = {
+  id: string;
+  title: string;
+  type: string;
+  isFavorite: boolean;
+  isPremium: boolean;
+  price: string;
+  images: string[];
+  rating: number;
+  onHover: ((offerId: string | null) => void);
 }
 
 export default PlaceCard;

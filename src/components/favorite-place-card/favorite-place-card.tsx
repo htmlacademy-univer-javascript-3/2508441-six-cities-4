@@ -9,9 +9,12 @@ function FavoritePlaceCard({...props}: PlaceCardType): JSX.Element {
 
   return (
     <article className="favorites__card place-card">
-      <div className={props.isPremium ? 'place-card__mark' : 'visually-hidden'}>
-        <span>Premium</span>
-      </div>
+      {
+        props.isPremium &&
+        <div className='place-card__mark'>
+          <span>Premium</span>
+        </div>
+      }
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <img
           onClick={() => handleClick(props.id)}
@@ -32,7 +35,9 @@ function FavoritePlaceCard({...props}: PlaceCardType): JSX.Element {
             </span>
           </div>
           <button
-            className={props.isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button'}
+            className= {props.isFavorite ?
+              'place-card__bookmark-button place-card__bookmark-button--active button' :
+              'place-card__bookmark-button button'}
             type="button"
           >
             <svg
