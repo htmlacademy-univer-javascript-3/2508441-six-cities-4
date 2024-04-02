@@ -1,7 +1,11 @@
-import {Place} from '../../types/Place.ts';
-import FavoritePlacesList from '../../components/favorite-places-list/favorite-places-list.tsx';
 import {Link} from 'react-router-dom';
+import FavoritePlacesList from '../../components/favorite-places-list/favorite-places-list.tsx';
 import {AppRoute} from '../../const.ts';
+import {FavoritePlace} from '../../types/FavoritePlace.ts';
+
+type FavoritesPageProps = {
+  favoritePlaces: FavoritePlace[];
+}
 
 function FavoritesPage({favoritePlaces}: FavoritesPageProps): JSX.Element {
   return(
@@ -76,10 +80,6 @@ function FavoritesPage({favoritePlaces}: FavoritesPageProps): JSX.Element {
       </footer>
     </div>
   );
-}
-
-type FavoritesPageProps = {
-  favoritePlaces: Place[];
 }
 
 export default FavoritesPage;

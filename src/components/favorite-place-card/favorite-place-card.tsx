@@ -1,12 +1,9 @@
-import {useNavigate} from 'react-router-dom';
-import {PlaceCardType} from '../../types/PlaceCardType.ts';
+import {Link} from 'react-router-dom';
+import {Offer} from '../../types/Offer.ts';
 
-function FavoritePlaceCard({...props}: PlaceCardType): JSX.Element {
-  const navigate = useNavigate();
-  const handleClick = (placeId: string) => {
-    navigate(`/offer/${placeId}`);
-  };
+type FavoritePlaceProps = Omit<Offer, 'city' | 'location'>
 
+function FavoritePlaceCard({...props}: FavoritePlaceProps): JSX.Element {
   return (
     <article className="favorites__card place-card">
       {
@@ -16,20 +13,20 @@ function FavoritePlaceCard({...props}: PlaceCardType): JSX.Element {
         </div>
       }
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <img
-          onClick={() => handleClick(props.id)}
-          style={{cursor: 'pointer'}}
-          className="place-card__image"
-          src={props.images[0]}
-          width={150}
-          height={110}
-          alt="Place image"
-        />
+        <Link to={`/offer/${props.id}`}>
+          <img
+            className="place-card__image"
+            src={props.previewImage}
+            width={150}
+            height={110}
+            alt="Place image"
+          />
+        </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">{props.price}</b>
+            <b className="place-card__price-value">€{props.price}</b>
             <span className="place-card__price-text">
                         /&nbsp;night
             </span>
@@ -57,7 +54,7 @@ function FavoritePlaceCard({...props}: PlaceCardType): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <div onClick={() => handleClick(props.id)} style={{cursor: 'pointer'}}>{props.title}</div>
+          <Link to={`/offer/${props.id}`}>{props.title}</Link>
         </h2>
         <p className="place-card__type">{props.type}</p>
       </div>

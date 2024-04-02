@@ -6,7 +6,8 @@ import PrivateRoute from '../private-route/private-route.tsx';
 import FavoritesPage from '../../pages/favorites-page/favorites-page.tsx';
 import NotFoundPage from '../../pages/not-found-page/not-found-page.tsx';
 import {AppRoute, AuthorizationStatus} from '../../const.ts';
-import {Place} from '../../types/Place.ts';
+import {FavoritePlace} from '../../types/FavoritePlace.ts';
+import {Offer} from '../../types/Offer.ts';
 
 function App({offers, favoritePlaces}: AppProps): JSX.Element {
   return (
@@ -42,8 +43,8 @@ function App({offers, favoritePlaces}: AppProps): JSX.Element {
 }
 
 type AppProps = {
-  offers: Place[];
-  favoritePlaces: Place[];
+  offers: Offer[];
+  favoritePlaces: FavoritePlace[];
 }
 
 export default App;

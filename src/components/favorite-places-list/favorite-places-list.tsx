@@ -1,5 +1,9 @@
-import {Place} from '../../types/Place.ts';
 import FavoritePlaceCard from '../favorite-place-card/favorite-place-card.tsx';
+import {Offer} from '../../types/Offer.ts';
+
+type FavoritePlacesListProps = {
+  favoritePlaces: Offer[];
+}
 
 function FavoritePlacesList({favoritePlaces}: FavoritePlacesListProps): JSX.Element {
   return (
@@ -13,16 +17,12 @@ function FavoritePlacesList({favoritePlaces}: FavoritePlacesListProps): JSX.Elem
           isFavorite={place.isFavorite}
           isPremium={place.isPremium}
           price={place.price}
-          images={place.images}
+          previewImage={place.previewImage}
           rating={place.rating}
         />
       ))}
     </div>
   );
-}
-
-type FavoritePlacesListProps = {
-  favoritePlaces: Place[];
 }
 
 export default FavoritePlacesList;

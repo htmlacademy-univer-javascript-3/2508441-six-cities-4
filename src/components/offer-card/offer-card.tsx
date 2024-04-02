@@ -1,18 +1,15 @@
-import {useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {Offer} from '../../types/Offer.ts';
 
-function PlaceCard({...props}: PlaceCardProps): JSX.Element {
-  const navigate = useNavigate();
+type PlaceCardProps = Omit<Offer, 'city' | 'location'> & { onHover: ((offerId: string | null) => void) }
 
+function OfferCard({...props}: PlaceCardProps): JSX.Element {
   const handleMouseEnter = (offerId: string) => {
     props.onHover(offerId);
   };
 
   const handleMouseLeave = () => {
     props.onHover(null);
-  };
-
-  const handleClick = (placeId: string) => {
-    navigate(`/offer/${placeId}`);
   };
 
   return (
@@ -27,20 +24,20 @@ function PlaceCard({...props}: PlaceCardProps): JSX.Element {
         </div>
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <img
-          onClick={() => handleClick(props.id)}
-          style={{cursor: 'pointer'}}
-          className="place-card__image"
-          src={props.images[0]}
-          width={260}
-          height={200}
-          alt="Place image"
-        />
+        <Link to={`/offer/${props.id}`}>
+          <img
+            className="place-card__image"
+            src={props.previewImage}
+            width={260}
+            height={200}
+            alt="Place image"
+          />
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">{props.price}</b>
+            <b className="place-card__price-value">€{props.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
@@ -62,7 +59,7 @@ function PlaceCard({...props}: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <div onClick={() => handleClick(props.id)} style={{cursor: 'pointer'}}>{props.title}</div>
+          <Link to={`/offer/${props.id}`}>{props.title}</Link>
         </h2>
         <p className="place-card__type">{props.type}</p>
       </div>
@@ -70,16 +67,4 @@ function PlaceCard({...props}: PlaceCardProps): JSX.Element {
   );
 }
 
-type PlaceCardProps = {
-  id: string;
-  title: string;
-  type: string;
-  isFavorite: boolean;
-  isPremium: boolean;
-  price: string;
-  images: string[];
-  rating: number;
-  onHover: ((offerId: string | null) => void);
-}
-
-export default PlaceCard;
+export default OfferCard;

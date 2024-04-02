@@ -1,6 +1,10 @@
 import {useState} from 'react';
-import PlaceCard from '../../components/place-card/place-card';
-import {Place} from '../../types/Place.ts';
+import OfferCard from '../offer-card/offer-card.tsx';
+import {Offer} from '../../types/Offer.ts';
+
+type OffersListProps = {
+  offers: Offer[];
+}
 
 function OffersList({offers}: OffersListProps): JSX.Element {
   const [hoveredOfferId, setHoveredOfferId] = useState<string | null>(null);
@@ -31,7 +35,7 @@ function OffersList({offers}: OffersListProps): JSX.Element {
       </form>
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer) => (
-          <PlaceCard
+          <OfferCard
             key={offer.id}
             onHover={handleOfferHover}
             id={offer.id}
@@ -40,17 +44,13 @@ function OffersList({offers}: OffersListProps): JSX.Element {
             isFavorite={offer.isFavorite}
             isPremium={offer.isPremium}
             price={offer.price}
-            images={offer.images}
+            previewImage={offer.previewImage}
             rating={offer.rating}
           />
         ))}
       </div>
     </section>
   );
-}
-
-type OffersListProps = {
-  offers: Place[];
 }
 
 export default OffersList;

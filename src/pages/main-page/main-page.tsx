@@ -1,7 +1,11 @@
-import {Place} from '../../types/Place.ts';
+import {Link} from 'react-router-dom';
 import OffersList from '../../components/offers-list/offers-list.tsx';
 import {AppRoute} from '../../const.ts';
-import {Link} from 'react-router-dom';
+import {Offer} from '../../types/Offer.ts';
+
+type MainPageProps = {
+  offers: Offer[];
+}
 
 function MainPage({offers}: MainPageProps): JSX.Element {
   return (
@@ -84,10 +88,6 @@ function MainPage({offers}: MainPageProps): JSX.Element {
       </main>
     </div>
   );
-}
-
-type MainPageProps = {
-  offers: Place[];
 }
 
 export default MainPage;

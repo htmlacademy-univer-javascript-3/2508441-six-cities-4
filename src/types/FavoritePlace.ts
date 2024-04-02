@@ -1,9 +1,7 @@
 import {City} from './City.ts';
-import {Host} from './Host.ts';
 import {LocationInfo} from './LocationInfo.ts';
 
-
-export type Place = {
+export type FavoritePlace = {
   id: string;
   title: string;
   type: string;
@@ -13,10 +11,5 @@ export type Place = {
   isFavorite?: boolean;
   isPremium: boolean;
   rating: number;
-  description: string;
-  bedrooms: number;
-  goods: string[];
-  host: Host;
-  images: string[];
-  maxAdults: number;
-};
+  previewImage: string;
+}
