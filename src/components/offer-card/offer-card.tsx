@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/Offer.ts';
 
-type PlaceCardProps = Omit<Offer, 'city' | 'location'> & { onHover: ((offerId: string | null) => void) }
+type PlaceCardProps = Omit<Offer, 'city' | 'location'> & { onHover: ((offerId: string | undefined) => void) }
 
 function OfferCard({...props}: PlaceCardProps): JSX.Element {
   const handleMouseEnter = (offerId: string) => {
@@ -9,7 +9,7 @@ function OfferCard({...props}: PlaceCardProps): JSX.Element {
   };
 
   const handleMouseLeave = () => {
-    props.onHover(null);
+    props.onHover(undefined);
   };
 
   return (

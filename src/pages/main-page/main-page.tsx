@@ -2,12 +2,21 @@ import {Link} from 'react-router-dom';
 import OffersList from '../../components/offers-list/offers-list.tsx';
 import {AppRoute} from '../../const.ts';
 import {Offer} from '../../types/Offer.ts';
+import CitiesMap from '../../components/cities-map/cities-map.tsx';
+import {useState} from 'react';
 
 type MainPageProps = {
   offers: Offer[];
 }
 
 function MainPage({offers}: MainPageProps): JSX.Element {
+  const [hoveredOfferId, setHoveredOfferId] = useState<string | undefined>(undefined);
+
+  const handleOfferHover = (offerId: string | undefined) => {
+    setHoveredOfferId(offerId);
+  };
+
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -79,9 +88,9 @@ function MainPage({offers}: MainPageProps): JSX.Element {
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <OffersList offers={offers} />
+            <OffersList offers={offers} onHover={handleOfferHover} />
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <CitiesMap city={offers[0].city} offers={offers} hoveredOfferId={hoveredOfferId} />
             </div>
           </div>
         </div>

@@ -1,23 +1,16 @@
-import {useState} from 'react';
 import OfferCard from '../offer-card/offer-card.tsx';
 import {Offer} from '../../types/Offer.ts';
 
 type OffersListProps = {
   offers: Offer[];
+  onHover: ((offerId: string | undefined) => void);
 }
 
-function OffersList({offers}: OffersListProps): JSX.Element {
-  const [hoveredOfferId, setHoveredOfferId] = useState<string | null>(null);
-
-  const handleOfferHover = (offerId: string | null) => {
-    setHoveredOfferId(offerId);
-  };
-
+function OffersList({...props}: OffersListProps): JSX.Element {
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">312 places to stay in Amsterdam</b>
-      <p>Hovered offer ID: {hoveredOfferId}</p>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex={0}>
@@ -34,10 +27,10 @@ function OffersList({offers}: OffersListProps): JSX.Element {
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer) => (
+        {props.offers.map((offer) => (
           <OfferCard
             key={offer.id}
-            onHover={handleOfferHover}
+            onHover={props.onHover}
             id={offer.id}
             title={offer.title}
             type={offer.type}
