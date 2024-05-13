@@ -47,7 +47,7 @@ function Map({...props}: MapProps) {
         }
       });
 
-      map.flyTo({lat: props.city?.location.latitude ?? 0, lng: props.city?.location.longitude ?? 0});
+      map.flyTo({lat: props.city?.location.latitude ?? 0, lng: props.city?.location.longitude ?? 0}, undefined, {duration: 0.01});
 
       return () => {
         map.removeLayer(markerLayer);
