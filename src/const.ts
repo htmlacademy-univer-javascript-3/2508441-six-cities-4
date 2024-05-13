@@ -1,9 +1,5 @@
 export const TIMEOUT_SHOW_ERROR = 2000;
 
-export const Setting = {
-  OffersAmount: 5,
-};
-
 export enum AppRoute {
   Main = '/',
   Login = '/login',
