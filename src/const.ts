@@ -33,6 +33,7 @@ export enum APIRoute {
   Offers = '/offers',
   Login = '/login',
   Logout = '/logout',
+  Comments = '/comments',
 }
 
 export const URL_MARKER_DEFAULT =
