@@ -11,7 +11,7 @@ type OffersListProps = {
   currentAmountOfOffers: number | undefined;
 }
 
-function OffersList({...props}: OffersListProps): JSX.Element {
+function OffersList({...props}: OffersListProps) {
   const [sortOption, setSortOption] = useState<SortOptions>(SortOptions.Popular);
 
   function handleChangeSortOption(newSortOption: SortOptions) {
